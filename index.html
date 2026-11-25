@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment Exercise</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<main class="app">
+    <!-- WELCOME PAGE -->
+    <section id="welcome-page" class="welcome-page">
+        <p class="eyebrow">RISK MANAGEMENT TOOL</p>
+        <h1>Risk Assessment Exercise</h1>
+
+        <p class="intro">
+            Practise identifying and evaluating risks by assessing
+            their probability and consequences.
+        </p>
+
+        <div class="welcome-options">
+            <button id="custom-exercise-button" class="welcome-option">
+
+                <span class="option-icon">✎</span>
+                <span class="option-title">Add your own questions</span>
+                <span class="option-description">
+                    Create your own exercise with 1–20 scenarios.
+                </span>
+                <span class="option-arrow">→</span>
+            </button>
+
+            <button id="default-exercise-button" class="welcome-option">
+                <span class="option-icon">▦</span>
+                <span class="option-title">Default Risk Exercise</span>
+                <span class="option-description">
+                    Start the exercise with three predefined scenarios.
+                </span>
+                <span class="option-arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- CUSTOM QUESTION BUILDER -->
+    <section id="builder-page" class="hidden">
+
+        <button class="back-button" id="builder-back">
+            ← Back to home
+        </button>
+
+        <div class="page-header">
+            <p class="eyebrow">CUSTOM EXERCISE</p>
+            <h1>Create your questions</h1>
+            <p class="intro">
+                Add your own scenarios and define the suggested
+                risk assessment for each one.
+            </p>
+        </div>
+
+        <div class="card builder-card">
+
+            <div class="builder-heading">
+                <div>
+                    <h2>Your scenarios</h2>
+                    <p class="muted-text">
+                        You can add between 1 and 20 scenarios.
+                    </p>
+                </div>
+
+                <span id="question-counter" class="counter">
+                    0 / 20
+                </span>
+            </div>
+
+            <div id="custom-questions-list"></div>
+
+            <button id="add-question-button" class="button secondary add-button">
+                + Add another question
+            </button>
+
+            <p id="builder-error" class="error-message"></p>
+
+            <button id="start-custom-button" class="button primary full-button">
+                Start Risk Assessment
+            </button>
+        </div>
+    </section>
+
+
+    <!-- EXERCISE PAGE -->
+    <section id="exercise-page" class="hidden">
+
+        <button class="back-button" id="exercise-back">
+            ← Back to home
+        </button>
+
+        <header class="page-header">
+            <p class="eyebrow">LEARNING EXERCISE</p>
+            <h1>Risk Assessment</h1>
+            <p class="intro">
+                Assess the probability and consequences of each scenario
+                using the 4 × 4 risk matrix.
+            </p>
+        </header>
+
+        <!-- SCENARIO -->
+        <section class="card scenario-panel">
+
+            <div class="scenario-topline">
+
+                <div>
+                    <p class="eyebrow">
+                        SCENARIO
+                        <span id="scenario-number">1</span>
+                        OF
+                        <span id="scenario-total">3</span>
+                    </p>
+
+                    <h2 id="scenario-heading"></h2>
+                </div>
+
+                <div class="progress-wrap">
+
+                    <span id="progress-label">0 completed</span>
+                    <div class="progress-track">
+                        <div id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <p id="scenario-description"></p>
+
+            <div class="task-hint">
+                Select one square in the matrix that best represents
+                your assessment.
+            </div>
+        </section>
+
+
+        <!-- MATRIX -->
+        <section class="card matrix-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">YOUR ASSESSMENT</p>
+                    <h2>Risk Matrix</h2>
+                </div>
+
+                <div id="selection-status">
+                    No square selected
+                </div>
+            </div>
+
+
+            <div class="matrix-layout">
+
+                <div class="y-axis-title">
+                    PROBABILITY ↑
+                </div>
+
+                <div class="matrix-content">
+
+                    <div id="matrix-grid" class="matrix-grid">
+                    </div>
+
+                    <div class="x-axis-title">
+                        CONSEQUENCES →
+                    </div>
+
+                    <div class="axis-ticks">
+                        <span>Very low</span>
+                        <span>Low</span>
+                        <span>High</span>
+                        <span>Very high</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEGEND -->
+            <div class="legend">
+
+                <span><i class="swatch low"></i> Low</span>
+                <span><i class="swatch medium"></i> Medium</span>
+                <span><i class="swatch high"></i> High</span>
+                <span><i class="swatch critical"></i> Critical</span>
+
+            </div>
+
+            <p class="matrix-help">
+                Probability is how likely the event is to happen.
+                Consequences describe how serious the impact would be.
+            </p>
+
+            <!-- NEW: INSTANT FEEDBACK -->
+            <div id="instant-feedback" style="display: none;">
+                <p id="instant-feedback-text"></p>
+            </div>
+
+
+            <div class="actions">
+
+                <button id="clear-selection" class="button secondary">
+                    Clear selection
+                </button>
+
+                <button id="next-button" class="button primary" disabled>
+                    Next scenario
+                </button>
+
+            </div>
+
+            <p id="selection-error" class="error-message"></p>
+
+        </section>
+
+        <!-- RESULTS -->
+        <section id="results" class="card results hidden">
+            <p class="eyebrow">EXERCISE COMPLETE</p>
+            <h2>Your assessments and feedback</h2>
+
+            <p class="results-intro">
+                Compare your choices with the suggested assessments.
+                Use the explanations as a starting point for discussion.
+            </p>
+
+            <div id="results-list"></div>
+            <div class="results-footer">
+                <p id="summary-text"></p>
+                <button id="restart-button" class="button primary">
+                    Start again
+                </button>
+            </div>
+        </section>
+    </section>
+
+    <footer>
+        Risk Assessment Exercise • Practice identifying and evaluating risk
+    </footer>
+</main>
+</body>
+</html>
